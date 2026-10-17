@@ -6,9 +6,10 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> products = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
 
         while (true) {
+
             System.out.println();
             System.out.println("==============================");
             System.out.println("       シンプル在庫管理システム");
@@ -22,27 +23,43 @@ public class Main {
 
             if (choice.equals("1")) {
 
-                System.out.print("登録する商品名を入力してください：");
+                System.out.print("商品名を入力してください：");
                 String productName = scanner.nextLine();
 
-                products.add(productName);
+                System.out.print("在庫数を入力してください：");
+                int stock = Integer.parseInt(scanner.nextLine());
+
+                Product product = new Product(productName, stock);
+                products.add(product);
 
                 System.out.println(productName + " を登録しました！");
 
             } else if (choice.equals("2")) {
 
                 System.out.println();
-                System.out.println("======= 商品一覧 =======");
+                System.out.println("========== 商品一覧 ==========");
 
                 if (products.isEmpty()) {
+
                     System.out.println("登録されている商品はありません。");
+
                 } else {
+
                     for (int i = 0; i < products.size(); i++) {
-                        System.out.println((i + 1) + ". " + products.get(i));
+
+                        Product product = products.get(i);
+
+                        System.out.println(
+                                (i + 1) + ". "
+                                        + product.getName()
+                                        + " / 在庫数："
+                                        + product.getStock()
+                                        + "個"
+                        );
                     }
                 }
 
-                System.out.println("========================");
+                System.out.println("==============================");
 
             } else if (choice.equals("3")) {
 
